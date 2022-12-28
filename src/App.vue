@@ -1,18 +1,13 @@
-<script>
-import OptionsApiVue from "./components/OptionsApi.vue";
+<script setup>
+import { ref } from "vue";
 import CompositionApiVue from "./components/CompositionApi.vue";
 
-export default {
-  components: {
-    CompositionApiVue,
-    OptionsApiVue,
-  },
-};
+const isOpen = ref(true);
 </script>
 
 <template>
-  <CompositionApiVue />
-  <OptionsApiVue />
+  <input type="checkbox" v-model="isOpen" />{{ isOpen }}
+  <CompositionApiVue v-if="isOpen" />
 </template>
 
 <style>

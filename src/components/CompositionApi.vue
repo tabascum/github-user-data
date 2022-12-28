@@ -1,5 +1,12 @@
 <script setup>
-import { reactive, ref, computed } from "vue";
+import {
+  reactive,
+  ref,
+  computed,
+  onMounted,
+  onUpdated,
+  onUnmounted,
+} from "vue";
 
 const searchInput = ref("");
 
@@ -38,10 +45,26 @@ const reposCountMessage = computed(() => {
     ? `${state.name} has ${state.repos.length} public repositories`
     : `${state.name} has no public repositories`;
 });
+
+onMounted(() => {
+  console.log("The component has been mounted");
+});
+
+onUpdated(() => {
+  console.log("The component has been updated");
+});
+
+onUnmounted(() => {
+  console.log("The component has been unmounted");
+});
 </script>
 
 <template>
   <h1>GitHub User Data</h1>
+  <p>
+    Searching for:
+    <strong>https://api.github.com/users/{{ searchInput }}</strong>
+  </p>
   <form @submit="fetchGithubUser">
     <input type="text" v-model="searchInput" />
     <button>Load User</button>
@@ -54,10 +77,11 @@ const reposCountMessage = computed(() => {
     <span>{{ state.bio }}</span>
   </div>
 
+  <h2>
+    {{ reposCountMessage }}
+  </h2>
+
   <section v-if="state.repos.length > 0">
-    <h2>
-      {{ reposCountMessage }}
-    </h2>
     <article v-for="repo of state.repos">
       <h3>{{ repo.full_name }}</h3>
       <p>{{ repo.description }}</p>
