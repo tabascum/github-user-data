@@ -1,13 +1,13 @@
 <script setup>
 import { ref } from "vue";
-import CompositionApiVue from "./components/CompositionApi.vue";
+import Profile from "./components/Profile.vue";
 
 const isOpen = ref(true);
 </script>
 
 <template>
   <input type="checkbox" v-model="isOpen" />{{ isOpen }}
-  <CompositionApiVue v-if="isOpen" />
+  <Profile v-if="isOpen" />
 </template>
 
 <style>
@@ -28,30 +28,6 @@ body {
   max-width: 40rem;
   margin: 0 auto;
   text-align: center;
-}
-
-img {
-  border: 1px solid #e5e5e5;
-  border-radius: 999px;
-  display: block;
-  margin: 1rem auto;
-  width: 8rem;
-  height: 8rem;
-}
-
-h1,
-h2 {
-  color: #f64348;
-  margin: 1rem auto 0.25rem;
-}
-
-h3 {
-  margin: 1rem auto 0.25rem;
-}
-
-span {
-  display: block;
-  margin: 1rem auto;
 }
 
 input,

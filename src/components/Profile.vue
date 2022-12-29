@@ -8,6 +8,8 @@ import {
   onUnmounted,
 } from "vue";
 
+import UserInfo from "./UserInfo.vue";
+
 const searchInput = ref("");
 
 const state = reactive({
@@ -69,12 +71,14 @@ onUnmounted(() => {
     <input type="text" v-model="searchInput" />
     <button>Load User</button>
   </form>
-  <div v-if="state.login">
-    <img v-bind:src="state.avatar_url" />
-    <strong>@{{ state.login }}</strong>
-    <h2>{{ state.name }}</h2>
-    <h3>{{ state.company }}</h3>
-    <span>{{ state.bio }}</span>
+  <div v-if="state.login !== ''">
+    <UserInfo
+      :login="state.login"
+      :name="state.login"
+      :company="state.company"
+      :bio="state.bio"
+      :avatar_url="state.avatar"
+    />
   </div>
 
   <h2>
@@ -93,29 +97,8 @@ onUnmounted(() => {
 // ...
 
 <style scoped>
-img {
-  border: 1px solid #e5e5e5;
-  border-radius: 999px;
-  display: block;
-  margin: 1rem auto;
-  width: 8rem;
-  height: 8rem;
-}
-
-h1,
-h2 {
-  color: #f64348;
-  margin: 1rem auto 0.25rem;
-}
-
-span {
-  display: block;
-  margin: 1rem auto;
-}
-
 input,
-button,
-h2 {
+button {
   max-width: 20rem;
   padding: 0.5rem;
 }
